@@ -1,0 +1,60 @@
+/*                                   Solution of problem      Meet In The Median   codechef problem                                             */
+#include <bits/stdc++.h>
+#include <unistd.h>
+#include <vector>
+#include <algorithm>
+using namespace std;
+typedef long long ll;
+int main(){
+    ios_base::sync_with_stdio(0);                    //fast input output
+    cin.tie(0);
+    int t;                                           //input t is number of test cases
+    cin>>t;
+    while(t--){
+        int n,k;                                     //here n is length of an array and k is length of median array which we have to find
+        cin>>n>>k;
+        vector<int>v,g;
+        map<int,int>mp; 
+        int i,j,cnt=0,count=0,a[n];
+        for(i=0;i<n;i++){
+            cin>>a[i];                               //here we are giving input to array of length n 
+            v.push_back(a[i]);
+        }
+        sort(v.begin(),v.end(),greater<int>());      //sorting vector v in non-increasing order    (o(nlogn))
+        for(i=0;i<k;i++){
+            mp[v[i]]++;                              //inserting first k elemnts in map  
+            g.push_back(v[i]);
+        }
+        cout<<g[(k)/2]<<"\n";                        //largest median of k array element
+        for(i=0;i<n;i++){
+           if(mp[a[i]]){                             //printing the largest k length median containing array
+           cout<<a[i]<<" ";                                
+           }
+       }
+        cout<<"\n";  
+    }
+    return 0;
+}
+/*
+                                                       Solution explaination
+                                                         Key terms :
+:-> medain of array : After sorting array in non decreasing order, middle element of array is median of array.
+                  in case n is odd element i.e. (n/2)th element is median.
+                  But in case n is even  two element is in middle n/2,(n/2)+1 but first one n/2 is taken as median element.
+:-> K median array is array of length k whose median we have to find here.
+
+Solution explaination: So now comes to solution part.
+                       What I have done in solution is first take n,k. Here n is length of array and k is as length whose median we have to find.
+                       I have then use c++ stl by declare two vectors v,g and map mp. In next line i declare variable i,j,k,cnt and array a of length n.
+                       after then as above i take input n,k and then array of length n. 
+                       I also simultaneously inserting array element in vector v.
+                       Basically what is my aim is to find largest k elements of array and by using vector v I do the same after inserting elements in vector 
+                       I sort vector in decreasing order.
+                       After then I store first k elements of vector in map and vector g.
+                       Since vector g is non increasing order but middle element is remain same always weather non-increasing or non-decreasing.
+                       Hence I then first cout middle element of vector g to get lasrgest K length array median.
+                       After then main problem in question is that we are not allowed to change the sequence of array hence by using map whatever element is present in map
+                       by iterating over array a we just output all elements, since array a is present in original form hence required subsequence we get as a result.
+
+
+*/
